@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Courts_test_AndroidX</string>
+    <string name="information">About</string>
+    <string name="setting">Setting</string>
+    <string name="openNavDrawer">Navigation Drawer Open</string>
+    <string name="closeNavDrawer">Navigation Drawer Close</string>
+</resources>
