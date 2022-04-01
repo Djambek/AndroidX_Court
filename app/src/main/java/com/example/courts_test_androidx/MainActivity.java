@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         Paper.init(this);
         if(Paper.book().read("city").equals("")){
-            Intent intent = new Intent(this, Home.class);
+            Intent intent = new Intent(this, FirstRun.class);
             startActivity(intent);
         }else {
             Intent intent = new Intent(this, Home.class);

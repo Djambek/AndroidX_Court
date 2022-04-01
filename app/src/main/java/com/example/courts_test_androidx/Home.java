@@ -32,27 +32,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Log.wtf("WW", "i don't know");
-        Button b = findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
+        floatingActionButton.bringToFront();
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, Search.class);
                 startActivity(intent);
             }
         });
-        FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
-        /*
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Toast.makeText(Home.this,"Clicked",Toast.LENGTH_SHORT).show();
-                Log.v("CLICKED","");
 
-            }
-        });
-
-         */
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
