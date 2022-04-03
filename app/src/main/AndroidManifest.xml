@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Courts_test_AndroidX">
         <activity
+            android:name=".Searching_result"
+            android:exported="false" />
+        <activity
             android:name=".Support"
             android:exported="false" />
         <activity

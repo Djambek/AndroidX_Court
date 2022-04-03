@@ -2,6 +2,7 @@ package com.example.courts_test_androidx;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,9 +13,14 @@ import android.widget.Spinner;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+
+import java.util.Arrays;
+
 import io.paperdb.Paper;
 
+
 public class Search extends AppCompatActivity {
+
     String[] courts  = {"Все суды", "Басманный районный суд","Замоскворецкий районный суд",
             "Мещанский районный суд","Пресненский районный суд","Таганский районный суд",
             "Тверской районный суд","Хамовнический районный", "Головинский районный суд", "Коптевский районный суд","Савёловский районный суд",
@@ -22,8 +28,9 @@ public class Search extends AppCompatActivity {
             "Измайловский районный суд", "Перовский районный суд", "Преображенский районный суд", "Кузьминский районный суд", "Лефортовский районный суд",
             "Люблинский районный суд", "Нагатинский районный суд", "Симоновский районный суд", "Чертановский районный суд", "Гагаринский районный суд", "Зюзинский районный суд",
             "Черёмушкинский районный суд", "Дорогомиловский районный суд", "Кунцевский районный суд", "Никулинский районный суд", "Солнцевский районный суд",
-            "Тушинский районный суд", "Хорошёвский районный суд", "Зеленоградский районный суд"};;
+            "Тушинский районный суд", "Хорошёвский районный суд", "Зеленоградский районный суд"};
     String selected_cout;
+
 
     String[] instance =  {"Первая", "Апелляционная", "Кассационная", "Надзорная"};
     String selected_instance;
@@ -42,6 +49,7 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         // spinner for courts
         Spinner spinner_court = findViewById(R.id.spinner3);
+        Arrays.sort(courts);
         ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.spinner_items, courts);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_court.setAdapter(adapter);
@@ -102,6 +110,18 @@ public class Search extends AppCompatActivity {
                 unique_id = textInputLayout_unique_id.getEditText().getText().toString().trim();
 
                 Log.d("TEX_T", participants);
+                String[] params = new String[8];
+                params[0] = Paper.book().read("city");
+                params[1] =selected_cout;
+                params[2] = unique_id;
+                params[3] = selected_instance;
+                params[4] = "";
+                params[5] = number_case;
+                params[6] = participants;
+                params[7] = selected_disturbance;
+                Intent intent = new Intent(Search.this, Searching_result.class);
+                intent.putExtra("params", params);
+                startActivity(intent);
             }
         });
 
