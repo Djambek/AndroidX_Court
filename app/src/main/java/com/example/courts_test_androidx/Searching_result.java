@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.ListView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,27 +41,40 @@ public class Searching_result extends AppCompatActivity {
                 params[6],
                 params[7]
         );
-        //ArrayList<ArrayList<String>> short_info = new ArrayList<ArrayList<>>();
+        final ArrayList<ArrayList<String>>[] result = new ArrayList[]{new ArrayList<ArrayList<String>>()};
         Thread thread = new Thread(){
             @Override
             public void run() {
                 try {
+                    result[0] = search.search(1);
                     Log.d("RESULT", String.valueOf(search.search(1)));
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         };
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        ListView list = findViewById(R.id.listview);
+        Log.d("RESULT2", String.valueOf(return_short_info(result[0])));
+        list.setAdapter(new ShortInfoAdapter(getApplicationContext(), return_short_info(result[0])));
 
     }
     static public ArrayList<ArrayList<String>> return_short_info(ArrayList<ArrayList<String>> search_result){
         ArrayList<ArrayList<String>> returned_value = new ArrayList<ArrayList<String>>();
         for (ArrayList<String> i: search_result){
             ArrayList<String> tmp = new ArrayList<>();
-
+            tmp.add(i.get(0));
+            tmp.add(i.get(1));
+            tmp.add(i.get(2));
+            returned_value.add(tmp);
         }
-        return null;
+        return returned_value;
     }
 }

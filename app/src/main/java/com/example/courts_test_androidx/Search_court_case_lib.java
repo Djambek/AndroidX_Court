@@ -1,5 +1,7 @@
 package com.example.courts_test_androidx;
 
+import android.util.Log;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -90,14 +92,14 @@ public class Search_court_case_lib {
                    String number_input_document, String number_case,
                    String participant, String type_case){
         if (city.equals("Москва")){
-            this.type_trial = msk_courts.get(type_trial); // суд
-            this.type_case = msk_type_case.get(type_case); // производство
-            this.type_instance = msk_instance.get(type_instance); // Инстанция
+            this.type_trial = msk_courts.get(type_trial) == null ? "":msk_courts.get(type_trial); // суд
+            this.type_case = msk_type_case.get(type_case) == null ? "":msk_type_case.get(type_case); // производство
+            this.type_instance = msk_instance.get(type_instance) == null ? "":msk_instance.get(type_instance); // Инстанция
         }
-        this.unique_id = unique_id; // Уникальный идентификатор дела
-        this.number_input_document = number_input_document; // номер входящего документа
-        this.number_case = number_case; // номер дела
-        this.participant = participant; // стороны
+        this.unique_id = unique_id.length() > 0 ? unique_id:""; // Уникальный идентификатор дела
+        this.number_input_document = number_input_document.length() > 0 ? number_input_document:""; // номер входящего документа
+        this.number_case = number_case.length() > 0 ?  number_case:""; // номер дела
+        this.participant = participant.length() > 0 ? participant:""; // стороны
 
 
 
@@ -109,7 +111,11 @@ public class Search_court_case_lib {
         this.res = Jsoup.connect(url).get();
 
         try {
-            int count_page = Integer.parseInt(res.getElementById("paginationFormInput").attr("data-max"));
+            String string_digital = res.getElementById("paginationForm").text();
+            System.out.println(string_digital);
+            int count_page =Integer.parseInt(string_digital.substring(12, string_digital.length()-1));
+
+
             return count_page;
         }
         catch (NullPointerException e){
@@ -117,6 +123,7 @@ public class Search_court_case_lib {
         }
 
     }
+
     public ArrayList<ArrayList<String>> search_all() throws IOException{
 
         return null;
@@ -127,6 +134,7 @@ public class Search_court_case_lib {
                 "&uid="+this.unique_id+"&instance="+this.type_instance+"&processType="+this.type_case+"&letterNumber="+
                 this.number_input_document+"&caseNumber="+this.number_case+"&participant="+this.participant+"&page="+ page;
         this.res = Jsoup.connect(url).get();
+        Log.d("URL", url);
         Elements table = this.res.select("table.custom_table").select("tbody");
         ArrayList<ArrayList<String>> answer = new ArrayList<ArrayList<String>>();
         for(Element el: table.select("tr")){
