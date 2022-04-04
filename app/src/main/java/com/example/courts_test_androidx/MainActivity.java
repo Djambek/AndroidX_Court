@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         Log.wtf("e", "Starting");
 
         Paper.init(this);
+
         Log.wtf("Paper", "Paper Started");
         if(Paper.book().read("city").equals("")){
             Intent intent = new Intent(this, FirstRun.class);

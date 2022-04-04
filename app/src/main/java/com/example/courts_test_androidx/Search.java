@@ -21,7 +21,7 @@ import io.paperdb.Paper;
 
 public class Search extends AppCompatActivity {
 
-    String[] courts  = {"Все суды", "Басманный районный суд","Замоскворецкий районный суд",
+    String[] courts  = {"ААА", "Басманный районный суд","Замоскворецкий районный суд",
             "Мещанский районный суд","Пресненский районный суд","Таганский районный суд",
             "Тверской районный суд","Хамовнический районный", "Головинский районный суд", "Коптевский районный суд","Савёловский районный суд",
             "Тимирязевский районный суд", "Бабушкинский районный суд", "Бутырский районный суд", "Останкинский районный суд",
@@ -32,7 +32,7 @@ public class Search extends AppCompatActivity {
     String selected_cout;
 
 
-    String[] instance =  {"Первая", "Апелляционная", "Кассационная", "Надзорная"};
+    String[] instance =  {"","Первая", "Апелляционная", "Кассационная", "Надзорная"};
     String selected_instance;
 
     String[] disturbance = {"Все типы судопроизводств", "Административное", "Гражданское",
@@ -50,6 +50,8 @@ public class Search extends AppCompatActivity {
         // spinner for courts
         Spinner spinner_court = findViewById(R.id.spinner3);
         Arrays.sort(courts);
+        courts[0] = "Все суды";
+
         ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.spinner_items, courts);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_court.setAdapter(adapter);
@@ -98,7 +100,9 @@ public class Search extends AppCompatActivity {
         };
         spinner_disturbance.setOnItemSelectedListener(itemSelectedListener_disturbance);
         spinner_disturbance.setAdapter(adapter_disturbance);
-
+        Paper.init(getApplicationContext());
+        Log.d("Paper", "Вызов");
+        Paper.book().read("city");
         Button b = findViewById(R.id.textButton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,19 +110,24 @@ public class Search extends AppCompatActivity {
                 TextInputLayout textInputLayout_participants = findViewById(R.id.textInputLayout3);
                 participants = textInputLayout_participants.getEditText().getText().toString().trim();
 
+                TextInputLayout textInputLayout_number_case = findViewById(R.id.textInputLayout2);
+                number_case = textInputLayout_number_case.getEditText().getText().toString().trim();
+
                 TextInputLayout textInputLayout_unique_id = findViewById(R.id.textInputLayout);
                 unique_id = textInputLayout_unique_id.getEditText().getText().toString().trim();
 
                 Log.d("TEX_T", participants);
-                String[] params = new String[8];
+                String[] params = new String[9];
                 params[0] = Paper.book().read("city");
-                params[1] =selected_cout;
-                params[2] = unique_id;
+                params[1] = selected_cout;
+                params[2] =  unique_id;
                 params[3] = selected_instance;
                 params[4] = "";
                 params[5] = number_case;
                 params[6] = participants;
                 params[7] = selected_disturbance;
+
+                params[8] = "-a"; // если юзер решил ничего не выбирать
                 Intent intent = new Intent(Search.this, Searching_result.class);
                 intent.putExtra("params", params);
                 startActivity(intent);

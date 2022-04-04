@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class Search_court_case_lib {
     private Map<String, String> msk_courts = Stream.of(new String[][] {
-            { "Все суды", "" },
+            { "Все суды", ""},
             {"mgs", "Московский городской суд"},
             {"babushkinskij", "Бабушкинский районный суд"},
             {"basmannyj", "Басманный районный суд"},
@@ -57,7 +57,7 @@ public class Search_court_case_lib {
             Collections::<String, String> unmodifiableMap));
 
     private Map<String, String> msk_instance = Stream.of(new String[][] {
-            {"", ""},
+            {" ", ""},
             {"Первая", "1"},
             {"Апелляционная", "2"},
             {"Кассационная", "3"},
@@ -89,15 +89,15 @@ public class Search_court_case_lib {
     Search_court_case_lib(String city, String type_trial, String unique_id, String type_instance,
                    String number_input_document, String number_case,
                    String participant, String type_case){
-        if (city.equals("msk")){
+        if (city.equals("Москва")){
             this.type_trial = msk_courts.get(type_trial); // суд
             this.type_case = msk_type_case.get(type_case); // производство
             this.type_instance = msk_instance.get(type_instance); // Инстанция
         }
-        this.unique_id = unique_id.length() > 0 ? unique_id:""; // Уникальный идентификатор дела
-        this.number_input_document = number_input_document.length() > 0 ? number_input_document:""; // номер входящего документа
-        this.number_case = number_case.length() > 0 ?  number_case:""; // номер дела
-        this.participant = participant.length() > 0 ? participant:""; // стороны
+        this.unique_id = unique_id; // Уникальный идентификатор дела
+        this.number_input_document = number_input_document; // номер входящего документа
+        this.number_case = number_case; // номер дела
+        this.participant = participant; // стороны
 
 
 
