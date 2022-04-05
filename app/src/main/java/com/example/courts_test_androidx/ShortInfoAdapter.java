@@ -38,7 +38,17 @@ public class ShortInfoAdapter extends BaseAdapter {
         TextView textView_number = my_view.findViewById(R.id.textView4);
         textView_number.setText("Номер дела: " + cases.get(i).get(0));
         TextView textView_plaintiff = my_view.findViewById(R.id.textView10);
-        textView_plaintiff.setText(cases.get(i).get(1));
+        String pl = "";
+        if (cases.get(i).get(1).contains("стец: ")) {
+            pl = cases.get(i).get(1).split("стец: ")[1].split("Ответчик: ")[0];
+        }
+        textView_plaintiff.setText("Истец: "+pl);
+        TextView textView_de = my_view.findViewById(R.id.textView12);
+        String de = "";
+        if (cases.get(i).get(1).contains("тветчик: ")) {
+            de = cases.get(i).get(1).split("тветчик: ")[1];
+        }
+        textView_de.setText("Ответчик: "+de);
         TextView textView_defendant = my_view.findViewById(R.id.textView11);
         textView_defendant.setText(cases.get(i).get(2));
         return my_view;

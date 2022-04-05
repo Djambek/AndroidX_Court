@@ -114,12 +114,10 @@ public class Search_court_case_lib {
             String string_digital = res.getElementById("paginationForm").text();
             System.out.println(string_digital);
             int count_page =Integer.parseInt(string_digital.substring(12, string_digital.length()-1));
-
-
             return count_page;
         }
-        catch (NullPointerException e){
-            return 0;
+        catch (NullPointerException | NumberFormatException  e){
+            return 1;
         }
 
     }

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -128,9 +129,12 @@ public class Search extends AppCompatActivity {
                 params[7] = selected_disturbance;
 
                 params[8] = "-a"; // если юзер решил ничего не выбирать
+                Toast.makeText(getApplicationContext(), "Загрузка...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Search.this, Searching_result.class);
                 intent.putExtra("params", params);
+                intent.putExtra("page", 1);
                 startActivity(intent);
+
             }
         });
 

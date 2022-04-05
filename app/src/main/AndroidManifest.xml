@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.courts_test_androidx">
-    <uses-permission android:name="android.permission.INTERNET"
-        android:usesCleartextTraffic="true"/>
+
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        android:usesCleartextTraffic="true" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Courts_test_AndroidX">
+        <activity
+            android:name=".Court_case"
+            android:exported="false" />
         <activity
             android:name=".Searching_result"
             android:exported="false" />
