@@ -10,5 +10,8 @@ public class Court_case extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_court_case);
+        Bundle arguments = getIntent().getExtras();
+        String link = arguments.getString("link");
+
     }
 }
