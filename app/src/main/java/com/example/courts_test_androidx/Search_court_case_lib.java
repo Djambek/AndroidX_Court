@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 
 public class Search_court_case_lib {
+    private String url;
     private Map<String, String> msk_courts = Stream.of(new String[][] {
             { "Все суды", ""},
             {"mgs", "Московский городской суд"},
@@ -100,14 +101,16 @@ public class Search_court_case_lib {
         this.number_input_document = number_input_document.length() > 0 ? number_input_document:""; // номер входящего документа
         this.number_case = number_case.length() > 0 ?  number_case:""; // номер дела
         this.participant = participant.length() > 0 ? participant:""; // стороны
-
+        this.url = "https://mos-gorsud.ru/rs/golovinskij/search?formType=shortForm&courtAlias="+this.type_trial+
+                "&uid="+unique_id+"&instance="+this.type_instance+"&processType="+this.type_case+"&letterNumber="+
+                this.number_input_document+"&caseNumber="+this.number_case+"&participant="+this.participant;
 
 
     }
+    public String get_link(){
+        return url;
+    }
     public int get_count_of_page() throws IOException {
-        String url = "https://mos-gorsud.ru/rs/golovinskij/search?formType=shortForm&courtAlias="+this.type_trial+
-                "&uid="+unique_id+"&instance="+this.type_instance+"&processType="+this.type_case+"&letterNumber="+
-                this.number_input_document+"&caseNumber="+this.number_case+"&participant="+this.participant;
         this.res = Jsoup.connect(url).get();
 
         try {

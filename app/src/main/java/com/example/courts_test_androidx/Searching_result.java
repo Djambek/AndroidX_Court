@@ -13,14 +13,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import de.javakaffee.kryoserializers.ArraysAsListSerializer;
 
 public class Searching_result extends AppCompatActivity {
-
+    JSONArray jsonObject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,18 +60,28 @@ public class Searching_result extends AppCompatActivity {
                 params[6],
                 params[7]
         );
-        ArrayList<ArrayList<String>>[] result = new ArrayList[]{new ArrayList<ArrayList<String>>()};
-        Integer[] pages_all = new Integer[1];
+        final Integer[] pages_all = new Integer[1];
         Thread thread = new Thread(){
             @Override
             public void run() {
                 try {
-                    pages_all[0] = search.get_count_of_page();
-                    result[0] = search.search(page);
-                    Log.d("RESULT", String.valueOf(search.search(1)));
+                    Log.d("ANSWER", "начинаем поиск");
+                    //pages_all[0] = search.get_count_of_page();
+                    String url = "http://ctf.djambek.com:8080/search_case?link="+search.get_link();
+                    Log.d("URL", url);
+                    Document res = Jsoup.connect(url).ignoreContentType(true).get();
+                    //Log.d("ANSWER", res.text());
+                    //Log.d("ANSWER", "!@3");
+                    //Log.d("ANSWER", String.valueOf(res));
+                    //Log.d("ANSWER", "Зашли сюда");
+                    jsonObject = new JSONObject(res.text()).getJSONArray("cases");
+                    //result[0] = "";
+                    pages_all[0] = new JSONObject(res.text()).getInt("pages");
+                    //Log.d("RESULT", String.valueOf(search.search(1)));
 
-                } catch (IOException e) {
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
+                    Log.e("ERROR", e.toString());
                 }
             }
         };
@@ -114,29 +131,33 @@ public class Searching_result extends AppCompatActivity {
         });
 
         ListView list = findViewById(R.id.listview);
-        Log.d("RESULT2", String.valueOf(return_short_info(result[0])));
-        list.setAdapter(new ShortInfoAdapter(getApplicationContext(), return_short_info(result[0])));
+        //Log.d("RESULT2", String.valueOf(return_short_info(result[0])));
+        list.setAdapter(new ShortInfoAdapter(getApplicationContext(), jsonObject));
         Log.d("SELECTED", "now we start to choice item");
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("SELECTED", String.valueOf(result[0].get(i).get(result[0].get(i).size()-1)));
+
                 Intent intent = new Intent(Searching_result.this, Court_case.class);
-                intent.putExtra("link", String.valueOf(result[0].get(i).get(result[0].get(i).size()-1)));
+                try {
+                    intent.putExtra("link", jsonObject.getJSONObject(i).getString("url"));
+                } catch (JSONException e) {
+                    Log.e("ERROR", e.toString());
+                }
                 startActivity(intent);
             }
         });
 
     }
-    static public ArrayList<ArrayList<String>> return_short_info(ArrayList<ArrayList<String>> search_result){
-        ArrayList<ArrayList<String>> returned_value = new ArrayList<ArrayList<String>>();
-        for (ArrayList<String> i: search_result){
-            ArrayList<String> tmp = new ArrayList<>();
-            tmp.add(i.get(0));
-            tmp.add(i.get(1));
-            tmp.add(i.get(2));
-            returned_value.add(tmp);
-        }
-        return returned_value;
-    }
 }
+//    JSONArray array = jsonObject.getJSONArray("cases");
+//    ArrayList<ArrayList<String>> cases = new ArrayList<ArrayList<String>>();
+//                    for (int i = 0; i < array.length(); i++) {
+//        ArrayList<String> tmp = new ArrayList<>();
+//        JSONObject case_info = array.getJSONObject(i);
+//        tmp.add((String) case_info.get("number"));
+//        JSONArray participants = case_info.getJSONArray("participants");
+//        for (int j = 0; j < participants.length(); j++) {
+//
+//        }
+//        }
