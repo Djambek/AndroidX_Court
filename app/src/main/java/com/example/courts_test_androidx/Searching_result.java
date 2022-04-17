@@ -137,7 +137,7 @@ public class Searching_result extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Toast.makeText(getApplicationContext(), "Загрузка...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Searching_result.this, Court_case.class);
                 try {
                     intent.putExtra("link", jsonObject.getJSONObject(i).getString("url"));
@@ -150,14 +150,3 @@ public class Searching_result extends AppCompatActivity {
 
     }
 }
-//    JSONArray array = jsonObject.getJSONArray("cases");
-//    ArrayList<ArrayList<String>> cases = new ArrayList<ArrayList<String>>();
-//                    for (int i = 0; i < array.length(); i++) {
-//        ArrayList<String> tmp = new ArrayList<>();
-//        JSONObject case_info = array.getJSONObject(i);
-//        tmp.add((String) case_info.get("number"));
-//        JSONArray participants = case_info.getJSONArray("participants");
-//        for (int j = 0; j < participants.length(); j++) {
-//
-//        }
-//        }

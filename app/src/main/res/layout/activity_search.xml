@@ -89,6 +89,17 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
         <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:text="Номер входящего документа"
+            android:textSize="23sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+        <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -97,7 +108,7 @@
             android:text="Стороны"
             android:textSize="23sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
         <Spinner
             android:id="@+id/spinner3"
@@ -171,15 +182,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView9">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:inputType="textCapWords"
                 android:layout_height="wrap_content"
                 android:hint="@string/court_competitors" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout4"
+            android:layout_width="0dp"
+            android:hint="номер документа в канцелярии суда"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+            app:layout_constraintStart_toStartOf="@+id/textView33"
+            app:layout_constraintTop_toBottomOf="@+id/textView33">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,6 +43,7 @@ public class Search extends AppCompatActivity {
 
     String unique_id;
     String number_case;
+    String number_doc;
     String participants;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,13 +118,17 @@ public class Search extends AppCompatActivity {
                 TextInputLayout textInputLayout_unique_id = findViewById(R.id.textInputLayout);
                 unique_id = textInputLayout_unique_id.getEditText().getText().toString().trim();
 
+                TextInputLayout textInputLayout_number_doc = findViewById(R.id.textInputLayout4);
+                number_doc = textInputLayout_number_doc.getEditText().getText().toString().trim();
+
+
                 Log.d("TEX_T", participants);
                 String[] params = new String[9];
                 params[0] = Paper.book().read("city");
                 params[1] = selected_cout;
                 params[2] =  unique_id;
                 params[3] = selected_instance;
-                params[4] = "";
+                params[4] = number_doc;
                 params[5] = number_case;
                 params[6] = participants;
                 params[7] = selected_disturbance;

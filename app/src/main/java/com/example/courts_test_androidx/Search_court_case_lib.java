@@ -102,7 +102,7 @@ public class Search_court_case_lib {
         this.number_case = number_case.length() > 0 ?  number_case:""; // номер дела
         this.participant = participant.length() > 0 ? participant:""; // стороны
         this.url = "https://mos-gorsud.ru/rs/golovinskij/search?formType=shortForm&courtAlias="+this.type_trial+
-                "&uid="+unique_id+"&instance="+this.type_instance+"&processType="+this.type_case+"&letterNumber="+
+                "&uid="+this.unique_id+"&instance="+this.type_instance+"&processType="+this.type_case+"&letterNumber="+
                 this.number_input_document+"&caseNumber="+this.number_case+"&participant="+this.participant;
 
 
@@ -110,46 +110,5 @@ public class Search_court_case_lib {
     public String get_link(){
         return url;
     }
-    public int get_count_of_page() throws IOException {
-        this.res = Jsoup.connect(url).get();
-
-        try {
-            String string_digital = res.getElementById("paginationForm").text();
-            System.out.println(string_digital);
-            int count_page =Integer.parseInt(string_digital.substring(12, string_digital.length()-1));
-            return count_page;
-        }
-        catch (NullPointerException | NumberFormatException  e){
-            return 1;
-        }
-
-    }
-
-    public ArrayList<ArrayList<String>> search_all() throws IOException{
-
-        return null;
-    }
-    public ArrayList<ArrayList<String>> search(int page) throws IOException {
-        page = Math.max(page, 1);
-        String url = "https://mos-gorsud.ru/rs/golovinskij/search?formType=shortForm&courtAlias="+this.type_trial+
-                "&uid="+this.unique_id+"&instance="+this.type_instance+"&processType="+this.type_case+"&letterNumber="+
-                this.number_input_document+"&caseNumber="+this.number_case+"&participant="+this.participant+"&page="+ page;
-        this.res = Jsoup.connect(url).get();
-        Log.d("URL", url);
-        Elements table = this.res.select("table.custom_table").select("tbody");
-        ArrayList<ArrayList<String>> answer = new ArrayList<ArrayList<String>>();
-        for(Element el: table.select("tr")){
-            ArrayList<String> tmp_list = new ArrayList<String>();
-            for(Element td: el.select("td")){
-                if(!td.text().equals("")){
-                    tmp_list.add(td.text());
-                }
-            }
-            tmp_list.add("https://mos-gorsud.ru/"+el.select("a.detailsLink").attr("href"));
-            answer.add(tmp_list);
-        }
-        return answer;
-    }
-
 
 }

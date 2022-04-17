@@ -46,8 +46,8 @@ public class ShortInfoAdapter extends BaseAdapter {
         View my_view = LayoutInflater.from(context).inflate(R.layout.shortinfo_adapterview, null);
         TextView textView_number = my_view.findViewById(R.id.textView4);
         TextView textView_plaintiff = my_view.findViewById(R.id.textView10);
-        TextView textView_status = my_view.findViewById(R.id.textView12);
-        TextView textView_defendant = my_view.findViewById(R.id.textView11);
+        TextView textView_status = my_view.findViewById(R.id.textView11);
+        TextView textView_defendant = my_view.findViewById(R.id.textView12);
         String type_first_slide = "";
         String name_firts_slide = "";
         String type_second_slide = "";
@@ -64,7 +64,7 @@ public class ShortInfoAdapter extends BaseAdapter {
                 name_firts_slide = part.getJSONObject(0).getString("name");
                 if (part.length() == 2) {
                     type_second_slide = part.getJSONObject(1).getString("type");
-                    name_second_slide = part.getJSONObject(0).getString("name");
+                    name_second_slide = part.getJSONObject(1).getString("name");
                 }
             }
 
