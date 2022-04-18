@@ -10,7 +10,7 @@
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1965" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/drawable/icon_plus.xml" value="0.1965" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/drawable/searching_glass.xml" value="0.1965" />
-        <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_court_case.xml" value="0.25" />
+        <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_court_case.xml" value="0.13306246825799897" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_first_run.xml" value="0.25" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_first_run2.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_home.xml" value="0.5" />
@@ -21,6 +21,7 @@
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_searching_result.xml" value="0.40634920634920635" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_settings.xml" value="0.5" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/activity_support.xml" value="0.13072916666666667" />
+        <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/court_info_adapter_view.xml" value="0.22" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/nav_had_layout.xml" value="0.33" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/nav_head_layout.xml" value="0.22" />
         <entry key="..\:/Users/Djambek/AndroidStudioProjects/Courts_test_AndroidX/app/src/main/res/layout/navigation_drawer.xml" value="0.192481884057971" />
